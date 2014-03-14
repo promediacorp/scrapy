@@ -59,7 +59,8 @@ def canonicalize_url(url, keep_blank_values=True, keep_fragments=False,
     query = urllib.urlencode(keyvals)
     path = safe_url_string(_unquotepath(path)) or '/'
     fragment = '' if not keep_fragments else fragment
-    return urlparse.urlunparse((scheme, netloc.lower(), path, params, query, fragment))
+    # modified by JD: don't keep params
+    return urlparse.urlunparse((scheme, netloc.lower(), path, '', query, fragment))
 
 
 def _unquotepath(path):
